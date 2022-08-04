@@ -1,0 +1,9 @@
+.card{
+    margin-top: 1em;
+}
+
+.card__pokemon{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
