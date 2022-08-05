@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { PokeResponse } from './interfaces/pokeResponse';
-import { Observable } from 'rxjs';
 import { PokeResult } from './interfaces/pokeResult';
 
 
@@ -11,20 +10,34 @@ import { PokeResult } from './interfaces/pokeResult';
 export class PokeService {
 
   urlApi:string=`https://pokeapi.co/api/v2/pokemon`;
-  urlPokemon:any[]=[];
+  pokemon:any[]=[];
+  params:HttpParams= new HttpParams()
+  .set('limit',20)
+  .set('offset','');
 
   
   constructor(private _http:HttpClient) { }
-  
-  getParams(num:number){
-   return new HttpParams()
-   .set('limit',num)
-   .set('offset','')
- }
-  getData(num:number):void{
-  const data=`${this.urlApi}`
-   this._http.get<PokeResponse>(data,{params:this.getParams(num)})
-   .subscribe((resp)=> resp.results.map((e)=> this.urlPokemon.push(e.url)))
-   console.log(this.urlPokemon);
+
+  get setPokemon(){
+    return this.pokemon;
   }
+
+  getData():void{
+    this._http.get<PokeResponse>(`${this.urlApi}`,{params:this.params})
+    .subscribe(resp => this.getPokemon(resp));
+  }
+
+  getPokemon(arg:PokeResponse):void{
+    arg.results.forEach((e)=> {
+      this._http.get<PokeResult>(e.url)
+      .subscribe(resp => this.pokemon.push(
+        {
+          id:resp.id,
+          name:resp.name,
+          image:resp.sprites.other?.dream_world.front_default,
+          type:resp.types.map((e)=>e.type.name)
+        }))
+      })
+  }
+  
 }

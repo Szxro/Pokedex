@@ -1,9 +1,14 @@
 <div class="card">
- <div class="grid">
-  <div class="col md:col-4 sm:col-6">
-    <p-card header="Hello World">
-      Content      
-    </p-card>
+  <div class="grid gap-3">
+    <div class="col md:col-4 sm:col-6" *ngFor="let item of getPokemon">
+      <div [class]="item.type[0]" class="card__pokemon">
+        <h1>{{ item.name | titlecase }}</h1>
+        <p>ID: {{ item.id }}</p>
+        <img [src]="item.image" [alt]="item.name" class="img__card" />
+        <p>
+          Type: {{ item.type[0] | titlecase }} {{ item.type[1] | titlecase }}
+        </p>
+      </div>
+    </div>
   </div>
- </div>
 </div>

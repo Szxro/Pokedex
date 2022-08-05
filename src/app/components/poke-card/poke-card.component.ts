@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { PokeResult } from '../../interfaces/pokeResult';
+import { PokeService } from '../../poke.service';
 
 
 
@@ -11,9 +11,13 @@ import { PokeResult } from '../../interfaces/pokeResult';
 })
 export class PokeCardComponent implements OnInit {
 
-  constructor(private _http:HttpClient) { }
+  constructor(private _poke:PokeService) { }
 
   ngOnInit(): void {
+  }
+
+  get getPokemon(){
+    return this._poke.setPokemon.sort((a,b)=> a.id - b.id);
   }
 }
 

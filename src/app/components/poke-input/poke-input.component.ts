@@ -13,8 +13,9 @@ export class PokeInputComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  getValue(num:number){
-     this._poke.getData(20);
+  getPokemon():void{
+    this._poke.getData();
   }
+
+
 }
