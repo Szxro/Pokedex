@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Result } from './interfaces/pokeResponse';
+import { Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -9,4 +8,5 @@ import { Result } from './interfaces/pokeResponse';
 })
 export class AppComponent {
 
+  
 }

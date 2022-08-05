@@ -1,21 +1,20 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PokeService } from '../../poke.service';
-import { PokeResponse, Result } from '../../interfaces/pokeResponse';
 
 @Component({
   selector: 'app-poke-input',
   templateUrl: './poke-input.component.html',
   styleUrls: ['./poke-input.component.scss']
 })
-export class PokeInputComponent implements OnInit {
+export class PokeInputComponent {
 
   constructor(private _poke:PokeService) { }
-
-  ngOnInit(): void {
-  }
-  getPokemon():void{
-    this._poke.getData();
+  
+  nextPokemon():void{
+    this._poke.putPokemon(+20);
   }
 
-
+  previousPokemon():void{
+    this._poke.putPokemon(-20);
+  }
 }

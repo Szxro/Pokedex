@@ -3,23 +3,26 @@
 }
 
 .card__pokemon{
+    width: 100%;
     color: #000;
     padding: 2em;
-    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     border-radius: 8px;
     height: 250px;
+    cursor: pointer;
 }
 
 .img__card{
   width: max-content;
   max-width: 200px;
-  position: absolute;
-  top: 15px;
-  right: -30px;
 }
 
 
- .rock {
+ .rock,
+ .ground {
     background-color: rgb(148, 81, 81);
   }
   .ghost {
@@ -37,7 +40,8 @@
   .normal {
     background-color: #F4F4F4;
   }
-  .fairy {
+  .fairy,
+  .fighting {
     background-color: rgba(255, 192, 203, 0.863);
   }
   .fire {
@@ -46,6 +50,16 @@
   .grass {
     background-color:#E2F9E1;
   }
-  .water {
+  .water,
+  .ice,
+  .dragon {
     background-color:#E0F1FD;
+  }
+
+  .psychic{
+    background-color: #6d2c7d;
+  }
+
+  .dark{
+    background-color: #808080;
   }

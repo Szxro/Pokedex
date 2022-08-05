@@ -1,10 +1,14 @@
-<div class="container">
-  <h1 class="container__title">Pokedex</h1>
-  <button
-    pButton
-    type="button"
-    label="Load Pokemons..."
-    class="p-button-outlined"
-    (click)="getPokemon()"
-  ></button>
-</div>
+<button
+pButton 
+type="button" 
+label="Previous"
+(click)="previousPokemon()" 
+class="p-button-outlined mr-3"
+></button>
+<button
+pButton 
+type="button" 
+label="Next"
+(click)="nextPokemon()" 
+class="p-button-outlined"
+></button>

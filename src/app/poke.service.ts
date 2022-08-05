@@ -1,43 +1,92 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable, ɵɵsetComponentScope } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { PokeResponse } from './interfaces/pokeResponse';
 import { PokeResult } from './interfaces/pokeResult';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PokeService {
+  urlApi: string = `https://pokeapi.co/api/v2/pokemon`;
+  previousApi: string = '';
+  loading: boolean = false;
+  pokemon: any[] = [];
+  pokemonName: any[] = [];
+  limit: number = 20;
+  offset: number = 0;
 
-  urlApi:string=`https://pokeapi.co/api/v2/pokemon`;
-  pokemon:any[]=[];
-  params:HttpParams= new HttpParams()
-  .set('limit',20)
-  .set('offset','');
+  constructor(private _http: HttpClient) {}
 
-  
-  constructor(private _http:HttpClient) { }
-
-  get setPokemon(){
+  get setPokemon() {
     return this.pokemon;
   }
 
-  getData():void{
-    this._http.get<PokeResponse>(`${this.urlApi}`,{params:this.params})
-    .subscribe(resp => this.getPokemon(resp));
+  get setPokemonbyName() {
+    return this.pokemonName;
   }
 
-  getPokemon(arg:PokeResponse):void{
-    arg.results.forEach((e)=> {
-      this._http.get<PokeResult>(e.url)
-      .subscribe(resp => this.pokemon.push(
-        {
-          id:resp.id,
-          name:resp.name,
-          image:resp.sprites.other?.dream_world.front_default,
-          type:resp.types.map((e)=>e.type.name)
-        }))
-      })
+  getData(): void {
+    this._http
+      .get<PokeResponse>(
+        `${this.urlApi}?limit=${this.limit}&offset=${this.offset}`
+      )
+      .subscribe((resp) => {
+        this.getPokemon(resp);
+      });
   }
-  
+
+  getPokemon(arg: PokeResponse): void {
+    this.pokemon = [];
+    this.loading = true;
+    arg.results.forEach((e) => {
+      this._http.get<PokeResult>(e.url).subscribe((resp) => {
+        this.pokemon.push({
+          id: resp.id,
+          name: resp.name,
+          image: resp.sprites.other?.dream_world.front_default,
+          type: resp.types.map((e) => e.type.name),
+        });
+        if (this.pokemon.length === 20) this.loading = false;
+      });
+    });
+  }
+
+  putPokemon(arg: number): void {
+    this.offset += arg;
+    if (this.offset < 0) this.offset = 0;
+    this.pokemon = [];
+    this.loading = true;
+    this._http
+      .get<PokeResponse>(
+        `${this.urlApi}?limit=${this.limit}&offset=${this.offset}`
+      )
+      .subscribe((resp) =>
+        resp.results.forEach((e) => {
+          this._http.get<PokeResult>(e.url).subscribe((resp) => {
+            this.pokemon.push({
+              id: resp.id,
+              name: resp.name,
+              image: resp.sprites.other?.dream_world.front_default,
+              type: resp.types.map((e) => e.type.name),
+            });
+            if (this.pokemon.length === 20) this.loading = false;
+          });
+        })
+      );
+  }
+
+  getByPokemonName(arg: string) {
+    this.pokemonName = [];
+    this._http.get<PokeResult>(`${this.urlApi}/${arg}`).subscribe((resp) => {
+      this.pokemonName.unshift({
+        id: resp.id,
+        name: resp.name,
+        image: resp.sprites.other?.dream_world.front_default,
+        abilities: resp.abilities.map((e) => e.ability.name).slice(0, 1),
+        moves: resp.moves.map((e) => e.move.name).slice(0, 3),
+        ps: resp.stats.map((e) => e.base_stat).slice(0, 1),
+      });
+      console.log(this.pokemonName);
+    });
+  }
 }
