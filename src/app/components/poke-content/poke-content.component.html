@@ -1,0 +1,48 @@
+<ng-template [ngIf]="error" [ngIfElse]="success">
+  <a routerLink="">
+    <i class="pi pi-backward pi--bigger"></i>
+  </a>
+  <div class="danger">
+    <div class="danger__container">
+      <h1>Pokemon not Found.....</h1>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #success>
+  <a routerLink="">
+    <i class="pi pi-backward pi--bigger"></i>
+  </a>
+  <div class="container">
+    <h1>Pokemon Info</h1>
+    <div class="card" [class]="item.type[0]" *ngFor="let item of pokemonName">
+      <div class="card__header">
+        <h1 class="card__name">{{ item.name | titlecase }}</h1>
+        <h2 class="card__health">HP: {{ item.health[0] }}</h2>
+      </div>
+      <div class="card__figure">
+        <img class="card__image" [src]="item.image" [alt]="item.name" />
+      </div>
+      <div class="card__body">
+        <h2 class="card__abilities">
+          Abilities: {{ item.abilities[0] | titlecase }}
+        </h2>
+        <p class="card__text">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas ipsum
+          ad blanditiis vero adipisci in inventore voluptate accusantium
+          repudiandae itaque, a odio ullam totam vel unde repellendus
+          reprehenderit. Reprehenderit, cupiditate!
+        </p>
+        <div class="card__second">
+          <h2 class="card__abilities">{{ item.abilities[1] | titlecase }}</h2>
+          <h2 class="card__abilities">{{ item.health[1] }}</h2>
+        </div>
+      </div>
+      <div class="card__footer">
+        <div class="card__content">
+          <h2 class="card__type">Type: {{ item.type[0] | titlecase }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

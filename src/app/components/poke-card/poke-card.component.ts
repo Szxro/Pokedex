@@ -10,18 +10,14 @@ export class PokeCardComponent {
   loading!: boolean;
 
   constructor(private _poke: PokeService) {
-    this.loading = this._poke.loading;
   }
 
   ngOnInit(): void {
     this._poke.getData();
+    this.loading = this._poke.loading;
   }
 
   get getPokemon() {
     return this._poke.setPokemon.sort((a, b) => a.id - b.id);
-  }
-
-  getValue(arg: any): void {
-    this._poke.getByPokemonName(arg.name);
   }
 }

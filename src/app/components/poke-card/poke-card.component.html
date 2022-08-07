@@ -1,29 +1,35 @@
-<ng-template [ngIf]='loading' [ngIfElse]="pokemonList" >
-  <p-progressSpinner></p-progressSpinner>
+<ng-template [ngIf]="loading" [ngIfElse]="pokemonList">
+  <div class="container">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
 </ng-template>
 
 <ng-template #pokemonList>
+  <h1>Pokedex</h1>
   <div class="card">
     <div class="grid gap-3 justify-content-center">
       <div class="col md:col-4 sm:col-6" *ngFor="let item of getPokemon">
-        <div [class]="item.type[0]" (click)="getValue(item)"  class="card__pokemon">
-         <div>
-          <h1>{{ item.name | titlecase }}</h1>
-          <p>ID: {{ item.id }}</p>
-          <p>
-            Type: {{ item.type[0] | titlecase }} {{ item.type[1] | titlecase }}
-          </p>
-         </div>
-         <div>
-          <img [src]="item.image" [alt]="item.name" class="img__card" />
-         </div>
+        <div
+          [class]="item.type[0]"
+          class="card__pokemon"
+          [routerLink]="['pokemon/', item.name]"
+        >
+          <div>
+            <h1>{{ item.name | titlecase }}</h1>
+            <p>ID: {{ item.id }}</p>
+            <p>
+              Type: {{ item.type[0] | titlecase }}
+              {{ item.type[1] | titlecase }}
+            </p>
+          </div>
+          <div>
+            <img [src]="item.image" [alt]="item.name" class="img__card" />
+          </div>
         </div>
       </div>
     </div>
     <div class="grid justify-content-center mt-4">
-     <app-poke-input></app-poke-input>
+      <app-poke-input></app-poke-input>
     </div>
-  </div>  
+  </div>
 </ng-template>
-
-  

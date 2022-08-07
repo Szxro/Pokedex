@@ -11,7 +11,6 @@ export class PokeService {
   previousApi: string = '';
   loading: boolean = false;
   pokemon: any[] = [];
-  pokemonName: any[] = [];
   limit: number = 20;
   offset: number = 0;
 
@@ -19,10 +18,6 @@ export class PokeService {
 
   get setPokemon() {
     return this.pokemon;
-  }
-
-  get setPokemonbyName() {
-    return this.pokemonName;
   }
 
   getData(): void {
@@ -37,7 +32,6 @@ export class PokeService {
 
   getPokemon(arg: PokeResponse): void {
     this.pokemon = [];
-    this.loading = true;
     arg.results.forEach((e) => {
       this._http.get<PokeResult>(e.url).subscribe((resp) => {
         this.pokemon.push({
@@ -55,7 +49,6 @@ export class PokeService {
     this.offset += arg;
     if (this.offset < 0) this.offset = 0;
     this.pokemon = [];
-    this.loading = true;
     this._http
       .get<PokeResponse>(
         `${this.urlApi}?limit=${this.limit}&offset=${this.offset}`
@@ -76,17 +69,6 @@ export class PokeService {
   }
 
   getByPokemonName(arg: string) {
-    this.pokemonName = [];
-    this._http.get<PokeResult>(`${this.urlApi}/${arg}`).subscribe((resp) => {
-      this.pokemonName.unshift({
-        id: resp.id,
-        name: resp.name,
-        image: resp.sprites.other?.dream_world.front_default,
-        abilities: resp.abilities.map((e) => e.ability.name).slice(0, 1),
-        moves: resp.moves.map((e) => e.move.name).slice(0, 3),
-        ps: resp.stats.map((e) => e.base_stat).slice(0, 1),
-      });
-      console.log(this.pokemonName);
-    });
+    return  this._http.get<PokeResult>(`${this.urlApi}/${arg}`);
   }
 }
