@@ -9,7 +9,7 @@ import { PokeResult } from './interfaces/pokeResult';
 export class PokeService {
   urlApi: string = `https://pokeapi.co/api/v2/pokemon`;
   previousApi: string = '';
-  loading: boolean = false;
+  loading!: boolean ;
   pokemon: any[] = [];
   limit: number = 20;
   offset: number = 0;
@@ -32,6 +32,7 @@ export class PokeService {
 
   getPokemon(arg: PokeResponse): void {
     this.pokemon = [];
+    this.loading = true;
     arg.results.forEach((e) => {
       this._http.get<PokeResult>(e.url).subscribe((resp) => {
         this.pokemon.push({
@@ -46,6 +47,7 @@ export class PokeService {
   }
 
   putPokemon(arg: number): void {
+    this.loading = true;
     this.offset += arg;
     if (this.offset < 0) this.offset = 0;
     this.pokemon = [];

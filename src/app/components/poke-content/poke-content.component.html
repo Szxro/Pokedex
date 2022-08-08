@@ -9,6 +9,12 @@
   </div>
 </ng-template>
 
+<ng-template [ngIf]="pokemonName.length === 0">
+  <div class="danger">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</ng-template>
+
 <ng-template #success>
   <a routerLink="">
     <i class="pi pi-backward pi--bigger"></i>

@@ -14,7 +14,9 @@ export class PokeCardComponent {
 
   ngOnInit(): void {
     this._poke.getData();
-    this.loading = this._poke.loading;
+    setInterval(()=>{
+      this.loading = this._poke.loading;
+    },100)
   }
 
   get getPokemon() {

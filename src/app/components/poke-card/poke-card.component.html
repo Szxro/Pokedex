@@ -17,10 +17,7 @@
           <div>
             <h1>{{ item.name | titlecase }}</h1>
             <p>ID: {{ item.id }}</p>
-            <p>
-              Type: {{ item.type[0] | titlecase }}
-              {{ item.type[1] | titlecase }}
-            </p>
+            <p>Type: {{ item.type[0] | titlecase }}</p>
           </div>
           <div>
             <img [src]="item.image" [alt]="item.name" class="img__card" />
