@@ -1,27 +1,38 @@
 # PokeApi
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.7.
+This project just use PokeApi to show pokemons with a limits of 20 ,have pagination and routes for show info about the pokemons
 
-## Development server
+# Preview :eyes:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Some pokemons (20 limit)
 
-## Code scaffolding
+![image](https://user-images.githubusercontent.com/103012492/183431185-284123cf-62ef-4c73-afb2-ebc07db1ebbf.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![image](https://user-images.githubusercontent.com/103012492/183431954-1c400a38-741a-45f3-8885-339399ce7c86.png)
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Pokemon Info
 
-## Running unit tests
+![image](https://user-images.githubusercontent.com/103012492/183431390-6519fef9-fdd8-40c3-aa63-9189bb455c2b.png)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+> The pokemon abilities info is just a lorem beacuse in the api the abilities is not defined
 
-## Running end-to-end tests
+# Technologies used in this project 👨‍💻
+* Angular (Basic Routing)
+* PrimeNG Styles
+* PrimeFlex
+* Api used: https://pokeapi.co/
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+# Prerequisites 📑
+1. Git clone this repostiory
+2. Know Typescript and some Angular concepts
+3. Know some PrimeNG and PrimeFlex concepts
 
-## Further help
+# People involved in this project ⌨️
+* @Szxro 
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Hiring (Emails) 👌
+If you want to hire me , you only have to write to me.
+- szxrocode@gmail.com (@Szxro)
+
+
